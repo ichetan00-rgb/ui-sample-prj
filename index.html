@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Banking - Payment Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-university"></i>
+                    <span>Corporate Banking</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#" class="nav-link" data-section="new-payment"><i class="fas fa-plus-circle"></i> New Payment</a></li>
+                    <li><a href="#" class="nav-link" data-section="payment-history"><i class="fas fa-history"></i> Payment History</a></li>
+                    <li><a href="#" class="nav-link" data-section="swift-tracker"><i class="fas fa-exchange-alt"></i> SWIFT Tracker</a></li>
+                    <li><a href="#" class="nav-link" data-section="reports"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="#" class="nav-link" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <nav class="breadcrumb">
+                        <span class="breadcrumb-item">Corporate Banking</span>
+                        <span class="breadcrumb-separator">/</span>
+                        <span class="breadcrumb-item current">Dashboard</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search payments..." id="search-input">
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn-icon" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <div class="user-profile">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' fill='none'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2321808D'/%3E%3Ctext x='16' y='20' text-anchor='middle' fill='white' font-size='12' font-weight='600'%3EJD%3C/text%3E%3C/svg%3E" alt="User Avatar">
+                            <span>John Doe</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section class="content-section active" id="dashboard">
+                <div class="section-header">
+                    <h1>Payment Dashboard</h1>
+                    <p>Monitor and track high-value payment transactions</p>
+                </div>
+
+                <!-- Key Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">5</div>
+                        <div class="metric-label">Total Payments</div>
+                        <div class="metric-change positive">+2 today</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">$12.55M</div>
+                        <div class="metric-label">Total Value</div>
+                        <div class="metric-change positive">+$6.6M today</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">2</div>
+                        <div class="metric-label">In Progress</div>
+                        <div class="metric-change neutral">Processing</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">1</div>
+                        <div class="metric-label">Failed</div>
+                        <div class="metric-change negative">Needs attention</div>
+                    </div>
+                </div>
+
+                <!-- Payment Status Table -->
+                <div class="card">
+                    <div class="card__header">
+                        <h3>Recent Payments</h3>
+                        <div class="table-controls">
+                            <select class="form-control" id="status-filter">
+                                <option value="">All Status</option>
+                                <option value="Success">Success</option>
+                                <option value="Failed">Failed</option>
+                                <option value="In Progress">In Progress</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card__body">
+                        <div class="table-container">
+                            <table class="payments-table" id="payments-table">
+                                <thead>
+                                    <tr>
+                                        <th>Payment ID</th>
+                                        <th>Amount</th>
+                                        <th>Beneficiary</th>
+                                        <th>Status</th>
+                                        <th>Current Stage</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="payments-tbody">
+                                    <!-- Dynamic content will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- New Payment Section -->
+            <section class="content-section" id="new-payment">
+                <div class="section-header">
+                    <h1>Initiate New Payment</h1>
+                    <p>Create a new high-value payment transaction</p>
+                </div>
+
+                <div class="card">
+                    <div class="card__body">
+                        <form class="payment-form" id="payment-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Amount</label>
+                                    <input type="number" class="form-control" placeholder="Enter amount" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Currency</label>
+                                    <select class="form-control" required>
+                                        <option value="">Select currency</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="GBP">GBP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Beneficiary Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter beneficiary name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Beneficiary Bank</label>
+                                    <input type="text" class="form-control" placeholder="Enter bank name" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">SWIFT Code</label>
+                                    <input type="text" class="form-control" placeholder="Enter SWIFT code" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Payment Purpose</label>
+                                    <input type="text" class="form-control" placeholder="Enter payment purpose" required>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn--outline">Save as Draft</button>
+                                <button type="submit" class="btn btn--primary">Initiate Payment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SWIFT Tracker Section -->
+            <section class="content-section" id="swift-tracker">
+                <div class="section-header">
+                    <h1>SWIFT Transaction Tracker</h1>
+                    <p>View detailed SWIFT message information</p>
+                </div>
+
+                <div class="card">
+                    <div class="card__body">
+                        <div class="swift-details" id="swift-details">
+                            <!-- SWIFT details will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other sections placeholder -->
+            <section class="content-section" id="payment-history">
+                <div class="section-header">
+                    <h1>Payment History</h1>
+                    <p>View all historical payment transactions</p>
+                </div>
+                <div class="card">
+                    <div class="card__body">
+                        <p>Payment history functionality coming soon...</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="reports">
+                <div class="section-header">
+                    <h1>Reports</h1>
+                    <p>Generate and view payment reports</p>
+                </div>
+                <div class="card">
+                    <div class="card__body">
+                        <p>Reports functionality coming soon...</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="settings">
+                <div class="section-header">
+                    <h1>Settings</h1>
+                    <p>Configure application preferences</p>
+                </div>
+                <div class="card">
+                    <div class="card__body">
+                        <p>Settings functionality coming soon...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Payment Details Modal -->
+    <div class="modal hidden" id="payment-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Payment Details</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Payment details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
