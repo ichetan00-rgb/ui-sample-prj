@@ -1,1125 +1,747 @@
-// Enhanced Payment data with city information and detailed stages
-const paymentsData = [
-  {
-    "paymentId": "PAY-2024-001234",
-    "amount": 2500000,
-    "currency": "USD",
-    "beneficiary": "ABC Corporation Ltd",
-    "beneficiaryBank": "JPMorgan Chase Bank",
-    "swiftCode": "CHASUS33",
-    "status": "Success",
-    "initiationDate": "2024-01-15T09:30:00Z",
-    "completionDate": "2024-01-15T11:45:00Z",
-    "currentStage": "Completed",
-    "swiftReference": "FT24015CHASUS33001234",
-    "originCity": "Beijing",
-    "destinationCity": "New York",
-    "stages": [
-      {"stage": 1, "name": "Payment Initiation", "status": "completed", "timestamp": "2024-01-15T09:30:00Z", "city": "Beijing"},
-      {"stage": 2, "name": "Compliance Checks", "status": "completed", "timestamp": "2024-01-15T09:32:00Z", "city": "Beijing"},
-      {"stage": 3, "name": "Formatting & Enrichment", "status": "completed", "timestamp": "2024-01-15T09:35:00Z", "city": "Beijing"},
-      {"stage": 4, "name": "Routing Decision", "status": "completed", "timestamp": "2024-01-15T09:40:00Z", "city": "Beijing"},
-      {"stage": 5, "name": "First Bank Processing", "status": "completed", "timestamp": "2024-01-15T09:45:00Z", "city": "Beijing"},
-      {"stage": 6, "name": "Intermediary Bank 1", "status": "completed", "timestamp": "2024-01-15T10:15:00Z", "city": "Delhi"},
-      {"stage": 7, "name": "Currency Conversion", "status": "completed", "timestamp": "2024-01-15T10:20:00Z", "city": "Delhi"},
-      {"stage": 8, "name": "Intermediary Bank 2", "status": "completed", "timestamp": "2024-01-15T10:45:00Z", "city": "London"},
-      {"stage": 9, "name": "Beneficiary Bank Receipt", "status": "completed", "timestamp": "2024-01-15T11:00:00Z", "city": "New York"},
-      {"stage": 10, "name": "Final Validation", "status": "completed", "timestamp": "2024-01-15T11:10:00Z", "city": "New York"},
-      {"stage": 11, "name": "Settlement Preparation", "status": "completed", "timestamp": "2024-01-15T11:20:00Z", "city": "New York"},
-      {"stage": 12, "name": "Settlement Execution", "status": "completed", "timestamp": "2024-01-15T11:30:00Z", "city": "New York"},
-      {"stage": 13, "name": "Confirmation Generation", "status": "completed", "timestamp": "2024-01-15T11:35:00Z", "city": "New York"},
-      {"stage": 14, "name": "Notification Dispatch", "status": "completed", "timestamp": "2024-01-15T11:40:00Z", "city": "New York"},
-      {"stage": 15, "name": "Reconciliation", "status": "completed", "timestamp": "2024-01-15T11:42:00Z", "city": "New York"},
-      {"stage": 16, "name": "Reporting & Audit", "status": "completed", "timestamp": "2024-01-15T11:44:00Z", "city": "New York"},
-      {"stage": 17, "name": "Completion", "status": "completed", "timestamp": "2024-01-15T11:45:00Z", "city": "New York"}
-    ]
-  },
-  {
-    "paymentId": "PAY-2024-001235",
-    "amount": 1800000,
-    "currency": "EUR",
-    "beneficiary": "Deutsche Manufacturing GmbH",
-    "beneficiaryBank": "Deutsche Bank AG",
-    "swiftCode": "DEUTDEFF",
-    "status": "Failed",
-    "initiationDate": "2024-01-15T14:20:00Z",
-    "failureReason": "Insufficient funds in correspondent account",
-    "currentStage": "Failed at Stage 8",
-    "swiftReference": "FT24015DEUTDEFF001235",
-    "originCity": "London",
-    "destinationCity": "Delhi",
-    "stages": [
-      {"stage": 1, "name": "Payment Initiation", "status": "completed", "timestamp": "2024-01-15T14:20:00Z", "city": "London"},
-      {"stage": 2, "name": "Compliance Checks", "status": "completed", "timestamp": "2024-01-15T14:22:00Z", "city": "London"},
-      {"stage": 3, "name": "Formatting & Enrichment", "status": "completed", "timestamp": "2024-01-15T14:25:00Z", "city": "London"},
-      {"stage": 4, "name": "Routing Decision", "status": "completed", "timestamp": "2024-01-15T14:30:00Z", "city": "London"},
-      {"stage": 5, "name": "First Bank Processing", "status": "completed", "timestamp": "2024-01-15T14:35:00Z", "city": "London"},
-      {"stage": 6, "name": "Intermediary Bank 1", "status": "completed", "timestamp": "2024-01-15T15:05:00Z", "city": "New York"},
-      {"stage": 7, "name": "Currency Conversion", "status": "completed", "timestamp": "2024-01-15T15:10:00Z", "city": "New York"},
-      {"stage": 8, "name": "Intermediary Bank 2", "status": "failed", "timestamp": "2024-01-15T15:35:00Z", "city": "Delhi", "error": "Insufficient funds in correspondent account"}
-    ]
-  },
-  {
-    "paymentId": "PAY-2024-001236",
-    "amount": 3200000,
-    "currency": "GBP",
-    "beneficiary": "London Financial Services",
-    "beneficiaryBank": "Barclays Bank PLC",
-    "swiftCode": "BARCGB22",
-    "status": "In Progress",
-    "initiationDate": "2024-01-15T16:10:00Z",
-    "currentStage": "Processing at Intermediary Bank",
-    "swiftReference": "FT24015BARCGB22001236",
-    "estimatedCompletion": "2024-01-16T10:00:00Z",
-    "originCity": "New York",
-    "destinationCity": "London",
-    "stages": [
-      {"stage": 1, "name": "Payment Initiation", "status": "completed", "timestamp": "2024-01-15T16:10:00Z", "city": "New York"},
-      {"stage": 2, "name": "Compliance Checks", "status": "completed", "timestamp": "2024-01-15T16:12:00Z", "city": "New York"},
-      {"stage": 3, "name": "Formatting & Enrichment", "status": "completed", "timestamp": "2024-01-15T16:15:00Z", "city": "New York"},
-      {"stage": 4, "name": "Routing Decision", "status": "completed", "timestamp": "2024-01-15T16:20:00Z", "city": "New York"},
-      {"stage": 5, "name": "First Bank Processing", "status": "completed", "timestamp": "2024-01-15T16:25:00Z", "city": "New York"},
-      {"stage": 6, "name": "Intermediary Bank 1", "status": "current", "timestamp": "2024-01-15T16:55:00Z", "city": "Delhi"}
-    ]
-  }
-];
+// Corporate Banking App JavaScript
 
-// City metrics data
-const cityMetrics = {
-  "totalPayments": {"Beijing": 156, "Delhi": 234, "London": 189, "New York": 321},
-  "totalValue": {"Beijing": 45600000, "Delhi": 67800000, "London": 78900000, "New York": 123400000},
-  "inProgress": {"Beijing": 12, "Delhi": 18, "London": 15, "New York": 25},
-  "failed": {"Beijing": 3, "Delhi": 7, "London": 4, "New York": 9}
-};
-
-// Stage definitions with sub-stages
-const stageDefinitions = {
-  1: {
-    name: "Payment Initiation",
-    subStages: ["Request Validation", "Account Verification", "Amount Check"]
-  },
-  2: {
-    name: "Compliance Checks",
-    subStages: ["AML Screening", "Sanctions Check"]
-  },
-  3: {
-    name: "Formatting & Enrichment",
-    subStages: ["SWIFT Format", "Field Validation"]
-  },
-  4: {
-    name: "Routing Decision",
-    subStages: ["Path Selection", "Bank Selection", "Route Optimization"]
-  },
-  5: {
-    name: "First Bank Processing",
-    subStages: ["Queue Entry", "Initial Processing"]
-  },
-  6: {
-    name: "Intermediary Bank 1",
-    subStages: ["Receipt", "Validation", "Forward"]
-  },
-  7: {
-    name: "Currency Conversion",
-    subStages: ["Rate Application", "Amount Conversion"]
-  },
-  8: {
-    name: "Intermediary Bank 2",
-    subStages: ["Receipt", "Processing", "Forward"]
-  },
-  9: {
-    name: "Beneficiary Bank Receipt",
-    subStages: ["Message Receipt", "Initial Validation"]
-  },
-  10: {
-    name: "Final Validation",
-    subStages: ["Account Check", "Beneficiary Verification", "Limit Check"]
-  },
-  11: {
-    name: "Settlement Preparation",
-    subStages: ["Settlement Queue", "Pre-processing"]
-  },
-  12: {
-    name: "Settlement Execution",
-    subStages: ["Debit Source", "Credit Target", "Balance Update"]
-  },
-  13: {
-    name: "Confirmation Generation",
-    subStages: ["Receipt Creation", "Status Update"]
-  },
-  14: {
-    name: "Notification Dispatch",
-    subStages: ["Internal Notification", "Customer Notification", "Bank Notification"]
-  },
-  15: {
-    name: "Reconciliation",
-    subStages: ["Transaction Matching", "Record Update"]
-  },
-  16: {
-    name: "Reporting & Audit",
-    subStages: ["Transaction Logging", "Audit Trail", "Compliance Report"]
-  },
-  17: {
-    name: "Completion",
-    subStages: ["Final Status Update", "Archive"]
-  }
-};
-
-class EnhancedPaymentDashboard {
-  constructor() {
-    this.filteredPayments = [...paymentsData];
-    this.currentSection = 'dashboard';
-    this.darkMode = false;
-    this.charts = {};
-    this.init();
-  }
-
-  init() {
-    this.setupThemeToggle();
-    this.setupNavigation();
-    this.setupSearch();
-    this.setupFilters();
-    this.setupModals();
-    this.setupForm();
-    this.setupMetricCards();
-    this.setupPaymentHistory();
-    this.renderPayments();
-    this.updateMetrics();
-  }
-
-  setupThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle');
-    if (!themeToggle) return;
-
-    // Check for saved theme preference or use system preference
-    const savedTheme = localStorage.getItem('theme');
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
-    
-    this.setTheme(initialTheme);
-
-    themeToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      this.darkMode = !this.darkMode;
-      const newTheme = this.darkMode ? 'dark' : 'light';
-      this.setTheme(newTheme);
-      localStorage.setItem('theme', newTheme);
-    });
-  }
-
-  setTheme(theme) {
-    const body = document.body;
-    const themeToggle = document.getElementById('theme-toggle');
-    
-    if (theme === 'dark') {
-      body.setAttribute('data-color-scheme', 'dark');
-      this.darkMode = true;
-      if (themeToggle) {
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        themeToggle.classList.add('dark-mode');
-      }
-    } else {
-      body.setAttribute('data-color-scheme', 'light');
-      this.darkMode = false;
-      if (themeToggle) {
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        themeToggle.classList.remove('dark-mode');
-      }
+class CorporateBankingApp {
+    constructor() {
+        this.currentUser = null;
+        this.currentTransaction = null;
+        this.zoomLevel = 1;
+        this.transactions = this.loadSampleData();
+        this.isDarkMode = localStorage.getItem('theme') === 'dark' || 
+                         (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        
+        this.init();
     }
 
-    // Refresh charts if they exist
-    setTimeout(() => {
-      Object.values(this.charts).forEach(chart => {
-        if (chart && typeof chart.update === 'function') {
-          chart.update();
+    init() {
+        this.setupEventListeners();
+        this.applyTheme();
+        this.showLoginPage();
+    }
+
+    setupEventListeners() {
+        // Theme toggle
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => this.toggleTheme());
         }
-      });
-    }, 100);
-  }
 
-  setupNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.content-section');
-    const breadcrumb = document.querySelector('.breadcrumb-item.current');
+        // Login form
+        const loginForm = document.getElementById('login-form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => this.handleLogin(e));
+        }
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const targetSection = link.dataset.section;
+        // Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => this.handleNavigation(e));
+        });
+
+        // Search functionality
+        const searchBtn = document.getElementById('search-btn');
+        const searchInput = document.getElementById('transaction-search');
         
-        console.log('Navigating to:', targetSection);
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => this.handleSearch());
+        }
+        
+        if (searchInput) {
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') this.handleSearch();
+            });
+        }
+
+        // Quick action buttons
+        document.querySelectorAll('.quick-action-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleQuickSearch(e));
+        });
+
+        // File upload
+        const uploadArea = document.getElementById('upload-area');
+        const fileInput = document.getElementById('file-upload');
+        
+        if (uploadArea && fileInput) {
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', (e) => this.handleDragOver(e));
+            uploadArea.addEventListener('drop', (e) => this.handleFileDrop(e));
+            fileInput.addEventListener('change', (e) => this.handleFileUpload(e));
+        }
+
+        // Summary cards
+        document.querySelectorAll('.summary-card').forEach(card => {
+            card.addEventListener('click', (e) => this.handleSummaryCardClick(e));
+        });
+
+        // Modal close
+        document.querySelectorAll('.modal-close').forEach(btn => {
+            btn.addEventListener('click', (e) => this.closeModal(e.target.closest('.modal')));
+        });
+
+        // Journey controls
+        const backToDashboard = document.getElementById('back-to-dashboard');
+        const backToHome = document.getElementById('back-to-home');
+        const zoomIn = document.getElementById('zoom-in');
+        const zoomOut = document.getElementById('zoom-out');
+        const fitScreen = document.getElementById('fit-screen');
+        
+        if (backToDashboard) backToDashboard.addEventListener('click', () => this.showDashboard());
+        if (backToHome) backToHome.addEventListener('click', () => this.showHomePage());
+        if (zoomIn) zoomIn.addEventListener('click', () => this.adjustZoom(1.2));
+        if (zoomOut) zoomOut.addEventListener('click', () => this.adjustZoom(0.8));
+        if (fitScreen) fitScreen.addEventListener('click', () => this.fitToScreen());
+
+        // Stage details panel close
+        const panelClose = document.querySelector('.panel-close');
+        if (panelClose) {
+            panelClose.addEventListener('click', () => this.closeStageDetails());
+        }
+
+        // Logout
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => this.logout());
+        }
+    }
+
+    loadSampleData() {
+        return {
+            "transactions": [
+                {
+                    "id": "TXN-2024-00000001",
+                    "accountHolder": "Morgan Stanley Corp",
+                    "debtorName": "JP Morgan Chase",
+                    "amount": 5000000,
+                    "currency": "USD",
+                    "status": "completed",
+                    "currentStage": 17,
+                    "totalStages": 17,
+                    "initiationTime": "2024-09-01T09:30:00Z",
+                    "completionTime": "2024-09-01T15:45:00Z",
+                    "route": ["Beijing", "Delhi", "London", "New York"],
+                    "stages": [
+                        {"id": 1, "name": "Payment Initiation", "status": "completed", "city": "Beijing", "timestamp": "2024-09-01T09:30:00Z"},
+                        {"id": 2, "name": "Format Validation", "status": "completed", "city": "Beijing", "timestamp": "2024-09-01T09:35:00Z"},
+                        {"id": 3, "name": "Compliance Check", "status": "completed", "city": "Beijing", "timestamp": "2024-09-01T09:45:00Z"},
+                        {"id": 4, "name": "Routing Decision", "status": "completed", "city": "Beijing", "timestamp": "2024-09-01T10:00:00Z"},
+                        {"id": 5, "name": "SWIFT Message Creation", "status": "completed", "city": "Beijing", "timestamp": "2024-09-01T10:15:00Z"},
+                        {"id": 6, "name": "Network Transmission", "status": "completed", "city": "Delhi", "timestamp": "2024-09-01T11:00:00Z"},
+                        {"id": 7, "name": "Intermediary Bank Processing", "status": "completed", "city": "Delhi", "timestamp": "2024-09-01T11:30:00Z"},
+                        {"id": 8, "name": "Correspondent Bank Review", "status": "completed", "city": "Delhi", "timestamp": "2024-09-01T12:00:00Z"},
+                        {"id": 9, "name": "Route Optimization", "status": "completed", "city": "London", "timestamp": "2024-09-01T13:00:00Z"},
+                        {"id": 10, "name": "Final Bank Processing", "status": "completed", "city": "London", "timestamp": "2024-09-01T13:30:00Z"},
+                        {"id": 11, "name": "Account Verification", "status": "completed", "city": "New York", "timestamp": "2024-09-01T14:00:00Z"},
+                        {"id": 12, "name": "Final Compliance Check", "status": "completed", "city": "New York", "timestamp": "2024-09-01T14:15:00Z"},
+                        {"id": 13, "name": "Fund Settlement", "status": "completed", "city": "New York", "timestamp": "2024-09-01T14:30:00Z"},
+                        {"id": 14, "name": "Confirmation Generation", "status": "completed", "city": "New York", "timestamp": "2024-09-01T15:00:00Z"},
+                        {"id": 15, "name": "Status Update", "status": "completed", "city": "New York", "timestamp": "2024-09-01T15:15:00Z"},
+                        {"id": 16, "name": "Customer Notification", "status": "completed", "city": "New York", "timestamp": "2024-09-01T15:30:00Z"},
+                        {"id": 17, "name": "Archive & Reconciliation", "status": "completed", "city": "New York", "timestamp": "2024-09-01T15:45:00Z"}
+                    ]
+                },
+                {
+                    "id": "TXN-2024-00000002",
+                    "accountHolder": "Goldman Sachs International",
+                    "debtorName": "Deutsche Bank AG",
+                    "amount": 25000000,
+                    "currency": "EUR",
+                    "status": "in_progress",
+                    "currentStage": 8,
+                    "totalStages": 50,
+                    "initiationTime": "2024-09-02T08:00:00Z",
+                    "completionTime": null,
+                    "route": ["London", "Delhi", "Beijing", "New York"],
+                    "stages": [
+                        {"id": 1, "name": "Payment Initiation", "status": "completed", "city": "London", "timestamp": "2024-09-02T08:00:00Z"},
+                        {"id": 2, "name": "Initial Validation", "status": "completed", "city": "London", "timestamp": "2024-09-02T08:05:00Z"},
+                        {"id": 3, "name": "Risk Assessment", "status": "completed", "city": "London", "timestamp": "2024-09-02T08:15:00Z"},
+                        {"id": 4, "name": "Regulatory Check", "status": "completed", "city": "London", "timestamp": "2024-09-02T08:30:00Z"},
+                        {"id": 5, "name": "Multi-currency Validation", "status": "completed", "city": "London", "timestamp": "2024-09-02T08:45:00Z"},
+                        {"id": 6, "name": "Enhanced Compliance", "status": "completed", "city": "Delhi", "timestamp": "2024-09-02T09:30:00Z"},
+                        {"id": 7, "name": "Cross-border Verification", "status": "completed", "city": "Delhi", "timestamp": "2024-09-02T10:00:00Z"},
+                        {"id": 8, "name": "Intermediary Bank Review", "status": "in_progress", "city": "Delhi", "timestamp": "2024-09-02T10:30:00Z"}
+                    ]
+                },
+                {
+                    "id": "TXN-2024-00000003",
+                    "accountHolder": "Citibank N.A.",
+                    "debtorName": "HSBC Holdings",
+                    "amount": 750000,
+                    "currency": "GBP",
+                    "status": "failed",
+                    "currentStage": 5,
+                    "totalStages": 12,
+                    "initiationTime": "2024-09-03T11:20:00Z",
+                    "completionTime": null,
+                    "route": ["New York", "London"],
+                    "failureReason": "Insufficient funds in debtor account",
+                    "stages": [
+                        {"id": 1, "name": "Payment Initiation", "status": "completed", "city": "New York", "timestamp": "2024-09-03T11:20:00Z"},
+                        {"id": 2, "name": "Format Validation", "status": "completed", "city": "New York", "timestamp": "2024-09-03T11:25:00Z"},
+                        {"id": 3, "name": "Account Verification", "status": "completed", "city": "New York", "timestamp": "2024-09-03T11:30:00Z"},
+                        {"id": 4, "name": "Fund Availability Check", "status": "completed", "city": "New York", "timestamp": "2024-09-03T11:35:00Z"},
+                        {"id": 5, "name": "Final Authorization", "status": "failed", "city": "New York", "timestamp": "2024-09-03T11:40:00Z", "error": "Insufficient funds"}
+                    ]
+                },
+                {
+                    "id": "TXN-2024-00000004",
+                    "accountHolder": "Bank of America Corp",
+                    "debtorName": "Wells Fargo & Company",
+                    "amount": 1200000,
+                    "currency": "USD",
+                    "status": "completed",
+                    "currentStage": 3,
+                    "totalStages": 3,
+                    "initiationTime": "2024-09-04T14:10:00Z",
+                    "completionTime": "2024-09-04T14:25:00Z",
+                    "route": ["New York"],
+                    "stages": [
+                        {"id": 1, "name": "Payment Initiation", "status": "completed", "city": "New York", "timestamp": "2024-09-04T14:10:00Z"},
+                        {"id": 2, "name": "Direct Processing", "status": "completed", "city": "New York", "timestamp": "2024-09-04T14:15:00Z"},
+                        {"id": 3, "name": "Settlement Complete", "status": "completed", "city": "New York", "timestamp": "2024-09-04T14:25:00Z"}
+                    ]
+                }
+            ]
+        };
+    }
+
+    toggleTheme() {
+        this.isDarkMode = !this.isDarkMode;
+        this.applyTheme();
+        localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
+    }
+
+    applyTheme() {
+        const themeIcon = document.getElementById('theme-icon');
+        if (themeIcon) {
+            if (this.isDarkMode) {
+                document.documentElement.setAttribute('data-color-scheme', 'dark');
+                themeIcon.textContent = '☀️';
+            } else {
+                document.documentElement.setAttribute('data-color-scheme', 'light');
+                themeIcon.textContent = '🌙';
+            }
+        }
+    }
+
+    handleLogin(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        // Allow any non-empty credentials for demo purposes
+        if (username && password) {
+            this.currentUser = { username };
+            this.showToast('Login successful!', 'success');
+            setTimeout(() => {
+                this.showMainApp();
+            }, 500);
+        } else {
+            this.showToast('Please enter valid credentials', 'error');
+        }
+    }
+
+    logout() {
+        this.currentUser = null;
+        this.showLoginPage();
+        this.showToast('Logged out successfully', 'info');
+    }
+
+    showLoginPage() {
+        const loginPage = document.getElementById('login-page');
+        const mainApp = document.getElementById('main-app');
+        
+        if (loginPage && mainApp) {
+            loginPage.classList.remove('hidden');
+            mainApp.classList.add('hidden');
+        }
+    }
+
+    showMainApp() {
+        const loginPage = document.getElementById('login-page');
+        const mainApp = document.getElementById('main-app');
+        
+        if (loginPage && mainApp) {
+            loginPage.classList.add('hidden');
+            mainApp.classList.remove('hidden');
+            this.showHomePage();
+        }
+    }
+
+    handleNavigation(e) {
+        e.preventDefault();
+        const page = e.target.dataset.page;
         
         // Update active nav link
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        
-        // Hide all sections first
-        sections.forEach(s => {
-          s.classList.remove('active');
-          s.style.display = 'none';
-        });
-        
-        // Show target section
-        const targetElement = document.getElementById(targetSection);
-        if (targetElement) {
-          targetElement.classList.add('active');
-          targetElement.style.display = 'block';
-          this.currentSection = targetSection;
-          
-          // Update breadcrumb
-          const sectionNames = {
-            'dashboard': 'Dashboard',
-            'new-payment': 'New Payment',
-            'payment-history': 'Payment History',
-            'reports': 'Reports'
-          };
-          if (breadcrumb) {
-            breadcrumb.textContent = sectionNames[targetSection];
-          }
-          
-          // Handle section-specific logic
-          if (targetSection === 'dashboard') {
-            this.renderPayments();
-          } else if (targetSection === 'payment-history') {
-            this.renderPaymentHistory();
-          } else if (targetSection === 'reports') {
-            setTimeout(() => this.initializeReports(), 100);
-          }
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+        e.target.classList.add('active');
+
+        switch (page) {
+            case 'home':
+                this.showHomePage();
+                break;
+            case 'dashboard':
+                this.showDashboard();
+                break;
+            case 'search':
+                this.showSearchResults([]);
+                break;
+            case 'reports':
+                this.showToast('Reports feature coming soon!', 'info');
+                break;
         }
-      });
-    });
-  }
+    }
 
-  setupSearch() {
-    const searchInput = document.getElementById('search-input');
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        e.stopPropagation();
-        this.filterPayments();
-      });
-      searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          e.stopPropagation();
-          this.filterPayments();
+    showHomePage() {
+        this.hideAllPages();
+        const homePage = document.getElementById('home-page');
+        if (homePage) {
+            homePage.classList.remove('hidden');
         }
-      });
-    }
-  }
-
-  setupFilters() {
-    const statusFilter = document.getElementById('status-filter');
-    if (statusFilter) {
-      statusFilter.addEventListener('change', (e) => {
-        e.stopPropagation();
-        this.filterPayments();
-      });
-    }
-  }
-
-  setupMetricCards() {
-    const metricCards = document.querySelectorAll('.metric-card.clickable');
-    metricCards.forEach(card => {
-      card.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const metric = card.dataset.metric;
-        console.log('Clicked metric card:', metric);
-        this.showCityBreakdown(metric);
-      });
-    });
-  }
-
-  showCityBreakdown(metricType) {
-    const modal = document.getElementById('city-breakdown-modal');
-    const title = document.getElementById('breakdown-title');
-    const content = document.getElementById('city-breakdown-content');
-    
-    if (!modal || !title || !content) {
-      console.error('City breakdown modal elements not found');
-      return;
     }
 
-    const metricTitles = {
-      'totalPayments': 'Total Payments by City',
-      'totalValue': 'Total Value by City', 
-      'inProgress': 'In Progress Payments by City',
-      'failed': 'Failed Payments by City'
-    };
-
-    title.textContent = metricTitles[metricType] || 'City Breakdown';
-    
-    const cities = ['Beijing', 'Delhi', 'London', 'New York'];
-    content.innerHTML = cities.map(city => {
-      const value = cityMetrics[metricType][city];
-      const formattedValue = metricType === 'totalValue' 
-        ? this.formatCurrency(value, 'USD')
-        : value.toString();
-      
-      return `
-        <div class="city-card">
-          <div class="city-name">${city}</div>
-          <div class="city-value">${formattedValue}</div>
-          <a href="#" class="city-details-link" data-city="${city}" data-metric="${metricType}">
-            <i class="fas fa-eye"></i>
-            View Payment Details
-          </a>
-        </div>
-      `;
-    }).join('');
-
-    // Add click listeners to city detail links
-    content.querySelectorAll('.city-details-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const city = link.dataset.city;
-        const metric = link.dataset.metric;
-        alert(`Showing ${metricTitles[metric]} details for ${city}`);
-      });
-    });
-
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
-
-  setupModals() {
-    const modals = document.querySelectorAll('.modal');
-    
-    modals.forEach(modal => {
-      const closeButtons = modal.querySelectorAll('.modal-close, .modal-overlay');
-      closeButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          modal.classList.add('hidden');
-          document.body.style.overflow = 'auto';
-        });
-      });
-    });
-
-    // Close modals on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        modals.forEach(modal => {
-          if (!modal.classList.contains('hidden')) {
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-          }
-        });
-      }
-    });
-  }
-
-  setupPaymentHistory() {
-    // Date range filters
-    const dateFilters = document.querySelectorAll('.date-filter');
-    dateFilters.forEach(filter => {
-      filter.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        dateFilters.forEach(f => f.classList.remove('active'));
-        filter.classList.add('active');
-        this.filterPaymentHistory(filter.dataset.range);
-      });
-    });
-
-    // Advanced filters
-    const historyStatusFilter = document.getElementById('history-status-filter');
-    const historyCurrencyFilter = document.getElementById('history-currency-filter');
-    
-    if (historyStatusFilter) {
-      historyStatusFilter.addEventListener('change', (e) => {
-        e.stopPropagation();
-        this.renderPaymentHistory();
-      });
-    }
-    
-    if (historyCurrencyFilter) {
-      historyCurrencyFilter.addEventListener('change', (e) => {
-        e.stopPropagation();
-        this.renderPaymentHistory();
-      });
-    }
-
-    // Export functionality
-    const exportBtn = document.getElementById('export-history');
-    if (exportBtn) {
-      exportBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.exportPaymentHistory();
-      });
-    }
-  }
-
-  filterPaymentHistory(range) {
-    console.log('Filtering payment history for range:', range);
-    this.renderPaymentHistory();
-  }
-
-  renderPaymentHistory() {
-    const tbody = document.getElementById('history-tbody');
-    const countEl = document.getElementById('history-count');
-    const totalEl = document.getElementById('history-total');
-    const successRateEl = document.getElementById('history-success-rate');
-    
-    if (!tbody) return;
-
-    // For demo purposes, using the same data
-    const historyData = [...paymentsData];
-    
-    tbody.innerHTML = historyData.map(payment => {
-      const statusClass = payment.status.toLowerCase().replace(' ', '-');
-      const formattedAmount = this.formatCurrency(payment.amount, payment.currency);
-      const formattedDate = this.formatDate(payment.initiationDate);
-
-      return `
-        <tr>
-          <td><code>${payment.paymentId}</code></td>
-          <td><strong>${formattedAmount}</strong></td>
-          <td>
-            <div>
-              <div style="font-weight: 500;">${payment.beneficiary}</div>
-              <div style="font-size: 12px; color: var(--color-text-secondary);">${payment.beneficiaryBank}</div>
-            </div>
-          </td>
-          <td>
-            <span class="status-badge ${statusClass}">${payment.status}</span>
-          </td>
-          <td>${formattedDate}</td>
-          <td>
-            <button class="action-btn view-journey" data-payment-id="${payment.paymentId}">
-              View Journey
-            </button>
-          </td>
-        </tr>
-      `;
-    }).join('');
-
-    // Update summary stats
-    const totalValue = historyData.reduce((sum, p) => sum + p.amount, 0);
-    const successCount = historyData.filter(p => p.status === 'Success').length;
-    const successRate = historyData.length > 0 ? (successCount / historyData.length * 100).toFixed(1) : '0';
-
-    if (countEl) countEl.textContent = historyData.length.toString();
-    if (totalEl) totalEl.textContent = this.formatCurrency(totalValue, 'USD');
-    if (successRateEl) successRateEl.textContent = `${successRate}%`;
-
-    // Add click listeners to view journey buttons
-    document.querySelectorAll('.view-journey').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const paymentId = btn.dataset.paymentId;
-        console.log('Viewing journey for payment:', paymentId);
-        this.showPaymentJourney(paymentId);
-      });
-    });
-  }
-
-  exportPaymentHistory() {
-    // Simulate CSV export
-    const csvContent = "data:text/csv;charset=utf-8," 
-      + "Payment ID,Amount,Currency,Beneficiary,Status,Date\n"
-      + paymentsData.map(p => 
-          `${p.paymentId},${p.amount},${p.currency},${p.beneficiary},${p.status},${p.initiationDate}`
-        ).join("\n");
-    
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "payment_history.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
-
-  filterPayments() {
-    const searchInput = document.getElementById('search-input');
-    const statusFilter = document.getElementById('status-filter');
-    
-    const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-    const statusFilterValue = statusFilter ? statusFilter.value : '';
-
-    this.filteredPayments = paymentsData.filter(payment => {
-      const matchesSearch = !searchTerm || 
-        payment.paymentId.toLowerCase().includes(searchTerm) ||
-        payment.beneficiary.toLowerCase().includes(searchTerm) ||
-        payment.beneficiaryBank.toLowerCase().includes(searchTerm);
-      
-      const matchesStatus = !statusFilterValue || payment.status === statusFilterValue;
-      
-      return matchesSearch && matchesStatus;
-    });
-
-    this.renderPayments();
-  }
-
-  renderPayments() {
-    const tbody = document.getElementById('payments-tbody');
-    if (!tbody) return;
-    
-    tbody.innerHTML = '';
-
-    if (this.filteredPayments.length === 0) {
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="7" style="text-align: center; padding: 40px; color: var(--color-text-secondary);">
-            No payments found matching your criteria
-          </td>
-        </tr>
-      `;
-      return;
-    }
-
-    this.filteredPayments.forEach(payment => {
-      const row = document.createElement('tr');
-      row.innerHTML = this.createPaymentRow(payment);
-      tbody.appendChild(row);
-    });
-
-    // Add click listeners to view journey buttons
-    document.querySelectorAll('.view-payment').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const paymentId = btn.dataset.paymentId;
-        console.log('Viewing payment journey for:', paymentId);
-        this.showPaymentJourney(paymentId);
-      });
-    });
-  }
-
-  createPaymentRow(payment) {
-    const statusClass = payment.status.toLowerCase().replace(' ', '-');
-    const formattedAmount = this.formatCurrency(payment.amount, payment.currency);
-    const formattedDate = this.formatDate(payment.initiationDate);
-
-    return `
-      <td><code>${payment.paymentId}</code></td>
-      <td><strong>${formattedAmount}</strong></td>
-      <td>
-        <div>
-          <div style="font-weight: 500;">${payment.beneficiary}</div>
-          <div style="font-size: 12px; color: var(--color-text-secondary);">${payment.beneficiaryBank}</div>
-        </div>
-      </td>
-      <td>
-        <span class="status-badge ${statusClass}">${payment.status}</span>
-      </td>
-      <td>
-        <div class="progress-indicator">
-          ${payment.status === 'In Progress' ? '<div class="progress-dot"></div>' : ''}
-          <span>${payment.currentStage}</span>
-        </div>
-      </td>
-      <td>${formattedDate}</td>
-      <td>
-        <button class="action-btn view-payment" data-payment-id="${payment.paymentId}">
-          View Journey
-        </button>
-      </td>
-    `;
-  }
-
-  showPaymentJourney(paymentId) {
-    const payment = paymentsData.find(p => p.paymentId === paymentId);
-    if (!payment) {
-      console.error('Payment not found:', paymentId);
-      return;
-    }
-
-    const modal = document.getElementById('payment-modal');
-    const modalBody = document.getElementById('modal-body');
-    
-    if (!modal || !modalBody) {
-      console.error('Payment modal elements not found');
-      return;
-    }
-
-    console.log('Showing payment journey for:', payment.paymentId);
-    modalBody.innerHTML = this.createPaymentJourneyHTML(payment);
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-
-    // Add click listeners to stage cards with a small delay to ensure DOM is ready
-    setTimeout(() => {
-      document.querySelectorAll('.stage-card').forEach(card => {
-        card.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const stageNum = parseInt(card.dataset.stage);
-          console.log('Clicked stage:', stageNum);
-          this.showStageDetails(payment, stageNum);
-        });
-      });
-    }, 100);
-  }
-
-  createPaymentJourneyHTML(payment) {
-    const cityRoute = this.createCityRoute(payment);
-    const stagesHTML = this.createStagesHTML(payment);
-
-    return `
-      <div class="payment-journey">
-        <div class="journey-header">
-          <div class="journey-info">
-            <div class="journey-info-label">Payment ID</div>
-            <div class="journey-info-value">${payment.paymentId}</div>
-          </div>
-          <div class="journey-info">
-            <div class="journey-info-label">Amount</div>
-            <div class="journey-info-value">${this.formatCurrency(payment.amount, payment.currency)}</div>
-          </div>
-          <div class="journey-info">
-            <div class="journey-info-label">Beneficiary</div>
-            <div class="journey-info-value">${payment.beneficiary}</div>
-          </div>
-          <div class="journey-info">
-            <div class="journey-info-label">Status</div>
-            <div class="journey-info-value">
-              <span class="status-badge ${payment.status.toLowerCase().replace(' ', '-')}">${payment.status}</span>
-            </div>
-          </div>
-        </div>
-
-        ${cityRoute}
-
-        <div class="stages-container">
-          ${stagesHTML}
-        </div>
-      </div>
-    `;
-  }
-
-  createCityRoute(payment) {
-    const cities = [payment.originCity];
-    if (payment.originCity !== 'Delhi') cities.push('Delhi');
-    if (payment.originCity !== 'London' && payment.destinationCity !== 'London') cities.push('London');
-    if (payment.destinationCity !== cities[cities.length - 1]) cities.push(payment.destinationCity);
-
-    return `
-      <div class="city-route">
-        ${cities.map((city, index) => `
-          <div class="city-node">
-            <div class="city-icon">${city.substring(0, 2).toUpperCase()}</div>
-            <div class="city-name">${city}</div>
-          </div>
-          ${index < cities.length - 1 ? '<i class="fas fa-arrow-right route-arrow"></i>' : ''}
-        `).join('')}
-      </div>
-    `;
-  }
-
-  createStagesHTML(payment) {
-    return Array.from({length: 17}, (_, i) => i + 1).map(stageNum => {
-      const stageDef = stageDefinitions[stageNum];
-      const paymentStage = payment.stages.find(s => s.stage === stageNum);
-      
-      let status = 'pending';
-      let timestamp = null;
-      let city = payment.originCity;
-      let errorMsg = null;
-
-      if (paymentStage) {
-        status = paymentStage.status;
-        timestamp = paymentStage.timestamp;
-        city = paymentStage.city;
-        errorMsg = paymentStage.error;
-      } else if (payment.status === 'In Progress' && stageNum === payment.stages.length + 1) {
-        status = 'current';
-      }
-
-      const subStagesHTML = stageDef.subStages.map((subStage, index) => {
-        let subStatus = 'pending';
-        if (status === 'completed') {
-          subStatus = 'completed';
-        } else if (status === 'current' && index === 0) {
-          subStatus = 'current';
-        } else if (status === 'failed') {
-          subStatus = index === 0 ? 'failed' : 'pending';
+    showDashboard() {
+        this.hideAllPages();
+        const dashboardPage = document.getElementById('dashboard-page');
+        if (dashboardPage) {
+            dashboardPage.classList.remove('hidden');
+            this.populateDashboard();
         }
-
-        return `
-          <div class="sub-stage">
-            <div class="sub-stage-dot ${subStatus}"></div>
-            <span>${subStage}</span>
-          </div>
-        `;
-      }).join('');
-
-      return `
-        <div class="stage-card ${status}" data-stage="${stageNum}">
-          <div class="stage-number">${stageNum}</div>
-          <div class="stage-title">${stageDef.name}</div>
-          <div class="stage-city"><i class="fas fa-map-marker-alt"></i> ${city}</div>
-          ${timestamp ? `<div class="stage-time">${this.formatDateTime(timestamp)}</div>` : ''}
-          ${errorMsg ? `<div class="stage-error" style="color: var(--color-error); font-size: var(--font-size-xs); margin-top: var(--space-4);">${errorMsg}</div>` : ''}
-          <div class="stage-status ${status}">
-            <i class="fas fa-${status === 'completed' ? 'check-circle' : status === 'current' ? 'clock' : status === 'failed' ? 'times-circle' : 'circle'}"></i>
-            ${status.charAt(0).toUpperCase() + status.slice(1)}
-          </div>
-          <div class="sub-stages">
-            ${subStagesHTML}
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  showStageDetails(payment, stageNum) {
-    const stageDef = stageDefinitions[stageNum];
-    const paymentStage = payment.stages.find(s => s.stage === stageNum);
-    
-    const modal = document.getElementById('stage-modal');
-    const title = document.getElementById('stage-title');
-    const body = document.getElementById('stage-body');
-    
-    if (!modal || !title || !body) {
-      console.error('Stage modal elements not found');
-      return;
     }
 
-    console.log('Showing details for stage:', stageNum);
-    title.textContent = `Stage ${stageNum}: ${stageDef.name}`;
-    
-    body.innerHTML = `
-      <div class="stage-details">
-        <div class="detail-row">
-          <span class="detail-label">Stage:</span>
-          <span class="detail-value">${stageNum} of 17</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-label">Status:</span>
-          <span class="detail-value">
-            <span class="status-badge ${paymentStage ? paymentStage.status : 'pending'}">
-              ${paymentStage ? paymentStage.status.charAt(0).toUpperCase() + paymentStage.status.slice(1) : 'Pending'}
-            </span>
-          </span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-label">City:</span>
-          <span class="detail-value">${paymentStage ? paymentStage.city : payment.originCity}</span>
-        </div>
-        ${paymentStage && paymentStage.timestamp ? `
-          <div class="detail-row">
-            <span class="detail-label">Timestamp:</span>
-            <span class="detail-value">${this.formatDateTime(paymentStage.timestamp)}</span>
-          </div>
-        ` : ''}
-        ${paymentStage && paymentStage.error ? `
-          <div class="detail-row">
-            <span class="detail-label">Error:</span>
-            <span class="detail-value" style="color: var(--color-error);">${paymentStage.error}</span>
-          </div>
-        ` : ''}
-        
-        <h4 style="margin: 20px 0 12px 0;">Sub-stages:</h4>
-        <div class="sub-stages">
-          ${stageDef.subStages.map((subStage, index) => {
-            let subStatus = 'pending';
-            if (paymentStage && paymentStage.status === 'completed') {
-              subStatus = 'completed';
-            } else if (paymentStage && paymentStage.status === 'current' && index === 0) {
-              subStatus = 'current';
-            } else if (paymentStage && paymentStage.status === 'failed') {
-              subStatus = index === 0 ? 'failed' : 'pending';
+    showSearchResults(results) {
+        this.hideAllPages();
+        const searchResultsPage = document.getElementById('search-results-page');
+        if (searchResultsPage) {
+            searchResultsPage.classList.remove('hidden');
+            this.populateSearchResults(results);
+        }
+    }
+
+    showPaymentJourney(transactionId) {
+        this.hideAllPages();
+        const transaction = this.transactions.transactions.find(t => t.id === transactionId);
+        if (transaction) {
+            this.currentTransaction = transaction;
+            const journeyPage = document.getElementById('journey-page');
+            if (journeyPage) {
+                journeyPage.classList.remove('hidden');
+                this.populatePaymentJourney(transaction);
             }
+        }
+    }
+
+    hideAllPages() {
+        document.querySelectorAll('.page-content').forEach(page => page.classList.add('hidden'));
+    }
+
+    handleSearch() {
+        const searchInput = document.getElementById('transaction-search');
+        if (searchInput) {
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm) {
+                const results = this.searchTransactions(searchTerm);
+                if (results.length === 1) {
+                    this.showPaymentJourney(results[0].id);
+                } else {
+                    this.showSearchResults(results);
+                }
+            }
+        }
+    }
+
+    handleQuickSearch(e) {
+        const txnId = e.target.dataset.txn;
+        if (txnId) {
+            this.showPaymentJourney(txnId);
+        }
+    }
+
+    searchTransactions(term) {
+        return this.transactions.transactions.filter(t => 
+            t.id.toLowerCase().includes(term.toLowerCase()) ||
+            t.accountHolder.toLowerCase().includes(term.toLowerCase()) ||
+            t.debtorName.toLowerCase().includes(term.toLowerCase())
+        );
+    }
+
+    handleDragOver(e) {
+        e.preventDefault();
+        e.target.classList.add('drag-over');
+    }
+
+    handleFileDrop(e) {
+        e.preventDefault();
+        e.target.classList.remove('drag-over');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            this.processFile(files[0]);
+        }
+    }
+
+    handleFileUpload(e) {
+        const file = e.target.files[0];
+        if (file) {
+            this.processFile(file);
+        }
+    }
+
+    processFile(file) {
+        this.showToast(`Processing file: ${file.name}`, 'info');
+        // Simulate file processing
+        setTimeout(() => {
+            this.showToast('File processed successfully!', 'success');
+            this.showSearchResults(this.transactions.transactions);
+        }, 2000);
+    }
+
+    populateDashboard() {
+        const transactions = this.transactions.transactions;
+        
+        // Calculate summary statistics
+        const totalCount = transactions.length;
+        const totalValue = transactions.reduce((sum, t) => sum + t.amount, 0);
+        const successCount = transactions.filter(t => t.status === 'completed').length;
+        const successValue = transactions.filter(t => t.status === 'completed').reduce((sum, t) => sum + t.amount, 0);
+        const progressCount = transactions.filter(t => t.status === 'in_progress').length;
+        const progressValue = transactions.filter(t => t.status === 'in_progress').reduce((sum, t) => sum + t.amount, 0);
+        const failedCount = transactions.filter(t => t.status === 'failed').length;
+        const failedValue = transactions.filter(t => t.status === 'failed').reduce((sum, t) => sum + t.amount, 0);
+
+        // Update summary cards
+        const totalCountEl = document.getElementById('total-count');
+        const totalValueEl = document.getElementById('total-value');
+        const successCountEl = document.getElementById('success-count');
+        const successValueEl = document.getElementById('success-value');
+        const progressCountEl = document.getElementById('progress-count');
+        const progressValueEl = document.getElementById('progress-value');
+        const failedCountEl = document.getElementById('failed-count');
+        const failedValueEl = document.getElementById('failed-value');
+
+        if (totalCountEl) totalCountEl.textContent = totalCount;
+        if (totalValueEl) totalValueEl.textContent = this.formatCurrency(totalValue, 'USD');
+        if (successCountEl) successCountEl.textContent = successCount;
+        if (successValueEl) successValueEl.textContent = this.formatCurrency(successValue, 'USD');
+        if (progressCountEl) progressCountEl.textContent = progressCount;
+        if (progressValueEl) progressValueEl.textContent = this.formatCurrency(progressValue, 'EUR');
+        if (failedCountEl) failedCountEl.textContent = failedCount;
+        if (failedValueEl) failedValueEl.textContent = this.formatCurrency(failedValue, 'GBP');
+
+        // Populate payments table
+        this.populatePaymentsTable();
+    }
+
+    populatePaymentsTable() {
+        const tbody = document.getElementById('payments-table-body');
+        if (!tbody) return;
+        
+        tbody.innerHTML = '';
+
+        this.transactions.transactions.forEach(transaction => {
+            const row = document.createElement('tr');
+            const progress = Math.round((transaction.currentStage / transaction.totalStages) * 100);
             
-            return `
-              <div class="sub-stage">
-                <div class="sub-stage-dot ${subStatus}"></div>
-                <span>${subStage}</span>
-              </div>
+            row.innerHTML = `
+                <td>${transaction.id}</td>
+                <td>${transaction.accountHolder}</td>
+                <td>${transaction.debtorName}</td>
+                <td>${this.formatCurrency(transaction.amount, transaction.currency)}</td>
+                <td><span class="status status--${this.getStatusClass(transaction.status)}">${this.formatStatus(transaction.status)}</span></td>
+                <td>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${progress}%"></div>
+                    </div>
+                    <small>${transaction.currentStage}/${transaction.totalStages}</small>
+                </td>
+                <td><button class="view-details-btn" data-txn="${transaction.id}">View Details</button></td>
             `;
-          }).join('')}
-        </div>
-      </div>
-    `;
+            tbody.appendChild(row);
+        });
 
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
-
-  setupForm() {
-    const form = document.getElementById('payment-form');
-    if (!form) return;
-    
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      alert('Payment initiated successfully! You will be redirected to the dashboard.');
-      
-      // Switch to dashboard
-      const dashboardLink = document.querySelector('[data-section="dashboard"]');
-      if (dashboardLink) {
-        dashboardLink.click();
-      }
-      
-      form.reset();
-    });
-  }
-
-  updateMetrics() {
-    // Calculate metrics from city data
-    const totalPayments = Object.values(cityMetrics.totalPayments).reduce((a, b) => a + b, 0);
-    const totalValue = Object.values(cityMetrics.totalValue).reduce((a, b) => a + b, 0);
-    const inProgress = Object.values(cityMetrics.inProgress).reduce((a, b) => a + b, 0);
-    const failed = Object.values(cityMetrics.failed).reduce((a, b) => a + b, 0);
-
-    // Update the metric values in the DOM
-    const totalPaymentsEl = document.getElementById('total-payments-value');
-    const totalValueEl = document.getElementById('total-value-value');
-    const inProgressEl = document.getElementById('in-progress-value');
-    const failedEl = document.getElementById('failed-value');
-
-    if (totalPaymentsEl) totalPaymentsEl.textContent = totalPayments.toString();
-    if (totalValueEl) totalValueEl.textContent = this.formatCurrency(totalValue, 'USD');
-    if (inProgressEl) inProgressEl.textContent = inProgress.toString();
-    if (failedEl) failedEl.textContent = failed.toString();
-  }
-
-  initializeReports() {
-    console.log('Initializing reports for section:', this.currentSection);
-    // Only initialize charts when reports section is active
-    if (this.currentSection !== 'reports') return;
-
-    // Clear existing charts
-    Object.values(this.charts).forEach(chart => {
-      if (chart && typeof chart.destroy === 'function') {
-        chart.destroy();
-      }
-    });
-    this.charts = {};
-
-    setTimeout(() => {
-      this.createVolumeChart();
-      this.createSuccessRateChart();
-      this.createCityPerformanceChart();
-      this.createProcessingTimeChart();
-      this.createFailureAnalysisChart();
-    }, 200);
-  }
-
-  createVolumeChart() {
-    const ctx = document.getElementById('volume-chart');
-    if (!ctx || this.charts.volume) return;
-
-    try {
-      this.charts.volume = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-          datasets: [{
-            label: 'Payment Volume',
-            data: [65, 78, 90, 81, 96, 108, 134, 142],
-            borderColor: '#1FB8CD',
-            backgroundColor: 'rgba(31, 184, 205, 0.1)',
-            tension: 0.4,
-            fill: true
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-    } catch (error) {
-      console.error('Error creating volume chart:', error);
+        // Add event listeners to view details buttons
+        document.querySelectorAll('.view-details-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const txnId = e.target.dataset.txn;
+                this.showPaymentJourney(txnId);
+            });
+        });
     }
-  }
 
-  createSuccessRateChart() {
-    const ctx = document.getElementById('success-rate-chart');
-    if (!ctx || this.charts.successRate) return;
-
-    try {
-      this.charts.successRate = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Beijing-NY', 'London-Delhi', 'NY-London', 'Delhi-Beijing'],
-          datasets: [{
-            label: 'Success Rate %',
-            data: [97.4, 95.8, 98.2, 94.6],
-            backgroundColor: ['#1FB8CD', '#FFC185', '#B4413C', '#ECEBD5']
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 100
-            }
-          }
+    populateSearchResults(results) {
+        const tbody = document.getElementById('search-results-body');
+        const count = document.getElementById('results-count');
+        
+        if (count) {
+            count.textContent = `Found ${results.length} transaction${results.length !== 1 ? 's' : ''}`;
         }
-      });
-    } catch (error) {
-      console.error('Error creating success rate chart:', error);
-    }
-  }
+        
+        if (tbody) {
+            tbody.innerHTML = '';
 
-  createCityPerformanceChart() {
-    const ctx = document.getElementById('city-performance-chart');
-    if (!ctx || this.charts.cityPerformance) return;
+            results.forEach(transaction => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${transaction.id}</td>
+                    <td>${transaction.accountHolder}</td>
+                    <td>${this.formatCurrency(transaction.amount, transaction.currency)}</td>
+                    <td><span class="status status--${this.getStatusClass(transaction.status)}">${this.formatStatus(transaction.status)}</span></td>
+                    <td>${transaction.route.join(' → ')}</td>
+                    <td><button class="view-details-btn" data-txn="${transaction.id}">View Journey</button></td>
+                `;
+                tbody.appendChild(row);
+            });
 
-    try {
-      this.charts.cityPerformance = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: ['Beijing', 'Delhi', 'London', 'New York'],
-          datasets: [{
-            data: [156, 234, 189, 321],
-            backgroundColor: ['#1FB8CD', '#FFC185', '#B4413C', '#ECEBD5']
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: 'bottom'
-            }
-          }
+            // Add event listeners to view details buttons
+            document.querySelectorAll('.view-details-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const txnId = e.target.dataset.txn;
+                    this.showPaymentJourney(txnId);
+                });
+            });
         }
-      });
-    } catch (error) {
-      console.error('Error creating city performance chart:', error);
     }
-  }
 
-  createProcessingTimeChart() {
-    const ctx = document.getElementById('processing-time-chart');
-    if (!ctx || this.charts.processingTime) return;
+    populatePaymentJourney(transaction) {
+        // Update payment details
+        const paymentId = document.getElementById('payment-id');
+        const paymentAmount = document.getElementById('payment-amount');
+        const paymentParties = document.getElementById('payment-parties');
+        const statusBadge = document.getElementById('payment-status-badge');
+        const paymentProgress = document.getElementById('payment-progress');
 
-    try {
-      this.charts.processingTime = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Stage 1-5', 'Stage 6-10', 'Stage 11-15', 'Stage 16-17'],
-          datasets: [{
-            label: 'Average Time (minutes)',
-            data: [45, 120, 85, 25],
-            backgroundColor: '#5D878F'
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
+        if (paymentId) paymentId.textContent = transaction.id;
+        if (paymentAmount) paymentAmount.textContent = this.formatCurrency(transaction.amount, transaction.currency);
+        if (paymentParties) paymentParties.textContent = `${transaction.accountHolder} → ${transaction.debtorName}`;
+        
+        if (statusBadge) {
+            statusBadge.textContent = this.formatStatus(transaction.status);
+            statusBadge.className = `status status--${this.getStatusClass(transaction.status)}`;
         }
-      });
-    } catch (error) {
-      console.error('Error creating processing time chart:', error);
-    }
-  }
-
-  createFailureAnalysisChart() {
-    const ctx = document.getElementById('failure-analysis-chart');
-    if (!ctx || this.charts.failureAnalysis) return;
-
-    try {
-      this.charts.failureAnalysis = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: ['Insufficient Funds', 'Invalid Account', 'Network Timeout', 'Compliance Issues', 'Other'],
-          datasets: [{
-            data: [35, 25, 20, 15, 5],
-            backgroundColor: ['#DB4545', '#D2BA4C', '#964325', '#944454', '#13343B']
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: 'bottom'
-            }
-          }
+        
+        if (paymentProgress) {
+            paymentProgress.textContent = `Stage ${transaction.currentStage} of ${transaction.totalStages}`;
         }
-      });
-    } catch (error) {
-      console.error('Error creating failure analysis chart:', error);
+
+        // Render journey visualization
+        this.renderJourneyVisualization(transaction);
     }
-  }
 
-  formatCurrency(amount, currency) {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: currency,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  }
+    renderJourneyVisualization(transaction) {
+        const canvas = document.getElementById('journey-canvas');
+        if (!canvas) return;
+        
+        canvas.innerHTML = '';
 
-  formatDate(dateString) {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    });
-  }
+        const timeline = document.createElement('div');
+        timeline.className = 'journey-timeline';
+        
+        const stageWidth = Math.max(100, 800 / transaction.totalStages);
+        timeline.style.minWidth = `${stageWidth * transaction.totalStages}px`;
 
-  formatDateTime(dateString) {
-    return new Date(dateString).toLocaleString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true
-    });
-  }
+        transaction.stages.forEach((stage, index) => {
+            const stageElement = document.createElement('div');
+            stageElement.className = 'journey-stage';
+            stageElement.style.width = `${stageWidth}px`;
+            
+            const node = document.createElement('div');
+            node.className = `stage-node ${stage.status}`;
+            node.textContent = stage.id;
+            
+            const name = document.createElement('div');
+            name.className = 'stage-name';
+            name.textContent = stage.name;
+            
+            const city = document.createElement('div');
+            city.className = 'stage-city';
+            city.textContent = stage.city;
+
+            stageElement.appendChild(node);
+            stageElement.appendChild(name);
+            stageElement.appendChild(city);
+
+            // Add connector line (except for last stage)
+            if (index < transaction.stages.length - 1) {
+                const connector = document.createElement('div');
+                connector.className = `stage-connector ${stage.status === 'completed' ? 'completed' : ''}`;
+                stageElement.appendChild(connector);
+            }
+
+            // Add click event listener
+            stageElement.addEventListener('click', () => {
+                this.showStageDetails(stage);
+            });
+
+            timeline.appendChild(stageElement);
+        });
+
+        canvas.appendChild(timeline);
+        this.zoomLevel = 1;
+    }
+
+    showStageDetails(stage) {
+        const panel = document.getElementById('stage-details-panel');
+        const stageName = document.getElementById('stage-name');
+        const stageStatus = document.getElementById('stage-status');
+        const stageCity = document.getElementById('stage-city');
+        const stageTimestamp = document.getElementById('stage-timestamp');
+        const errorElement = document.getElementById('stage-error');
+        const stageErrorText = document.getElementById('stage-error-text');
+        
+        if (stageName) stageName.textContent = stage.name;
+        if (stageStatus) stageStatus.textContent = this.formatStatus(stage.status);
+        if (stageCity) stageCity.textContent = stage.city;
+        if (stageTimestamp) stageTimestamp.textContent = this.formatTimestamp(stage.timestamp);
+        
+        if (errorElement && stageErrorText) {
+            if (stage.error) {
+                stageErrorText.textContent = stage.error;
+                errorElement.classList.remove('hidden');
+            } else {
+                errorElement.classList.add('hidden');
+            }
+        }
+
+        if (panel) {
+            panel.classList.add('visible');
+        }
+    }
+
+    closeStageDetails() {
+        const panel = document.getElementById('stage-details-panel');
+        if (panel) {
+            panel.classList.remove('visible');
+        }
+    }
+
+    adjustZoom(factor) {
+        this.zoomLevel *= factor;
+        const canvas = document.querySelector('.journey-timeline');
+        if (canvas) {
+            canvas.style.transform = `scale(${this.zoomLevel})`;
+            canvas.style.transformOrigin = 'left center';
+        }
+    }
+
+    fitToScreen() {
+        const canvas = document.querySelector('.journey-timeline');
+        const container = document.getElementById('journey-canvas');
+        if (canvas && container) {
+            const containerWidth = container.offsetWidth;
+            const canvasWidth = canvas.scrollWidth;
+            this.zoomLevel = Math.min(1, containerWidth / canvasWidth);
+            canvas.style.transform = `scale(${this.zoomLevel})`;
+            canvas.style.transformOrigin = 'left center';
+        }
+    }
+
+    handleSummaryCardClick(e) {
+        const section = e.currentTarget.dataset.section;
+        if (section) {
+            this.showCityBreakdown(section);
+        }
+    }
+
+    showCityBreakdown(section) {
+        const modal = document.getElementById('city-breakdown-modal');
+        const title = document.getElementById('breakdown-title');
+        const content = document.getElementById('city-breakdown-content');
+        
+        if (title) {
+            title.textContent = `${section.charAt(0).toUpperCase() + section.slice(1)} Payments by City`;
+        }
+        
+        if (content) {
+            // Generate city breakdown data
+            const cities = ['London', 'New York', 'Delhi', 'Beijing'];
+            const breakdown = cities.map(city => {
+                const cityTransactions = this.transactions.transactions.filter(t => {
+                    if (section === 'total') return t.route.includes(city);
+                    return t.route.includes(city) && (
+                        (section === 'success' && t.status === 'completed') ||
+                        (section === 'progress' && t.status === 'in_progress') ||
+                        (section === 'failed' && t.status === 'failed')
+                    );
+                });
+                
+                return {
+                    city,
+                    count: cityTransactions.length,
+                    value: cityTransactions.reduce((sum, t) => sum + t.amount, 0)
+                };
+            });
+
+            content.innerHTML = breakdown.map(item => `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; padding: 8px; background: var(--color-bg-1); border-radius: 6px;">
+                    <span><strong>${item.city}</strong></span>
+                    <span>${item.count} transactions (${this.formatCurrency(item.value, 'USD')})</span>
+                </div>
+            `).join('');
+        }
+
+        if (modal) {
+            modal.classList.remove('hidden');
+        }
+    }
+
+    closeModal(modal) {
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+    }
+
+    formatCurrency(amount, currency) {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: currency
+        }).format(amount);
+    }
+
+    formatStatus(status) {
+        const statusMap = {
+            'completed': 'Completed',
+            'in_progress': 'In Progress',
+            'failed': 'Failed'
+        };
+        return statusMap[status] || status;
+    }
+
+    getStatusClass(status) {
+        const classMap = {
+            'completed': 'success',
+            'in_progress': 'warning',
+            'failed': 'error'
+        };
+        return classMap[status] || 'info';
+    }
+
+    formatTimestamp(timestamp) {
+        return new Date(timestamp).toLocaleString();
+    }
+
+    showToast(message, type = 'info') {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        
+        container.appendChild(toast);
+        
+        // Trigger animation
+        setTimeout(() => toast.classList.add('show'), 100);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                if (container.contains(toast)) {
+                    container.removeChild(toast);
+                }
+            }, 300);
+        }, 3000);
+    }
 }
 
-// Initialize the enhanced dashboard when DOM is loaded
+// Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM loaded, initializing enhanced dashboard...');
-  
-  // Initialize dashboard
-  const dashboard = new EnhancedPaymentDashboard();
-  
-  // Ensure dashboard is visible by default
-  const dashboardSection = document.getElementById('dashboard');
-  const otherSections = document.querySelectorAll('.content-section:not(#dashboard)');
-  
-  if (dashboardSection) {
-    dashboardSection.classList.add('active');
-    dashboardSection.style.display = 'block';
-  }
-  
-  otherSections.forEach(section => {
-    section.classList.remove('active');
-    section.style.display = 'none';
-  });
-  
-  // Add smooth scrolling
-  document.documentElement.style.scrollBehavior = 'smooth';
-  
-  console.log('Enhanced dashboard initialized successfully');
+    new CorporateBankingApp();
 });
